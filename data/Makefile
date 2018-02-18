@@ -1,4 +1,2 @@
-.PHONY: sentences
-
-sentences:
+sentences.txt:
 	./prepare_sentences.sh

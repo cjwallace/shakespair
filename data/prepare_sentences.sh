@@ -22,6 +22,7 @@ cat will_play_text.csv | cut -d \; -f 6 | sed 's/\"//g' > will_play_cleaner.csv
 # Replace double dash '--' with space
 # Remove carriage returns (they're on every line)
 # Replace newlines with spaces
+# Replace tabs with spaces
 # Replace space after each fullstop with newline
 # Replace question mark after each fullstop with newline
 # Replace exclamation mark after each fullstop with newline
@@ -36,12 +37,11 @@ cat will_play_cleaner.csv | sed -E '/(^ACT|^SCENE|^Enter|^Exit|^Exeunt)/d' \
     | sed 's/--/ /g' \
     | tr -d '\r' \
     | tr '\n' ' ' \
+    | tr '\t' ' ' \
     | sed $'s/\. /\.\\\n/g' \
     | sed $'s/\? /\?\\\n/g' \
     | sed $'s/\! /\!\\\n/g' \
-    | tr A-Z a-z> sentences.csv
+    | tr A-Z a-z> sentences.txt
 
 # 3. Cleanup
 rm will_play_cleaner.csv
-
-# This will not be perfect - there are edge cases.
